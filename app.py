@@ -8,6 +8,7 @@ from io import BytesIO
 from PIL import Image
 from database import collection  # Import MongoDB connection
 import logging
+import os  # Added for Render deployment
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -135,7 +136,6 @@ def upload_image():
         return jsonify({"success": False, "message": "❌ No matching face found"}), 200
 
 
-
 @app.route("/api/complaints", methods=["GET"])
 def get_complaints():
     """ Fetch complaints from MongoDB """
@@ -148,4 +148,5 @@ def get_complaints():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Get PORT from Render
+    app.run(host="0.0.0.0", port=port)  # Ensure it listens on all interfaces
