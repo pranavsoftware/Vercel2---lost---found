@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const mongoose = require("mongoose");
-
+console.log(process.env.MONGO_URI)
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
